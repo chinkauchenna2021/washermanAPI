@@ -1,4 +1,4 @@
-import {z ,  } from 'zod'
+import {number, z ,  } from 'zod'
 
  export const ZRegistration = z.object({
      email: z.string().email({message:" not a valid email "}),
@@ -10,4 +10,10 @@ import {z ,  } from 'zod'
      balance: z.number().optional()
 })
 
+
+
+export const ZUsersLogin = z.object({
+     email : z.string().email(),
+     password: z.string().min(5 , {message:"Password too short"})
+})
  

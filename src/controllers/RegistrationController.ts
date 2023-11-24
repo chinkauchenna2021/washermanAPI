@@ -1,25 +1,23 @@
+import {Request , Response , NextFunction} from 'express' 
+import {z} from 'zod'
 import { PrismaClient } from "@prisma/client";
-import { IRegistrationController } from "../dto/IRegistration";
+import { IRegistration} from "../dto/IRegistration";
 import { ZRegistration } from "../lib/Zod";
+import { RegistrationModel } from '../model/Registration.model';
+import prisma from '../lib/PrismaGlobalClient';
 
-export function registration({prisma , usersInputObject}:IRegistrationController){
-    return async function(){
+export function registration(){
+    return async function(req:Request , res:Response ){
         try{
-        const data = await ZRegistration.parseAsync(usersInputObject)
-
-      await prisma?.user?.create({
-             data:{
-                email:data.email,
-                password: data.password,
-                fistname:data.fistname,
-                lastname: data.lastname,
-                address: data.address,
-                pics: data.pics
-             }
-        })
-
+      const  registationControllers = await RegistrationModel();
+      const registationStatus =  registationControllers(prisma , req)
+      res.status(201).json(registationStatus)
     }catch(error){
-      throw new Error("registration failed "+ error)
+        if(error instanceof z.ZodError){
+            res.status(400).json({message:"input validation error " , error : error.errors} )
+        }else{
+          res.status(500).json({message:"server error "})
+        }
     }
        
    }

@@ -1,3 +1,4 @@
+import {Request , Response , NextFunction} from 'express' 
 import { PrismaClient } from "@prisma/client"
 import { IUsersLogin } from "./UsersLogin"
 
@@ -6,21 +7,20 @@ import { IUsersLogin } from "./UsersLogin"
 declare global{
     namespace Express{
       interface Request{
-        user: IUsersLogin
+        users: IUsersLogin
       }
     }
 }
 
 
-export interface IRegistrationController{
-   prisma:PrismaClient
-   usersInputObject:{
-    email:string 
-    password:string 
-    fistname:string
-    lastname:string
-    address:string 
-    pics:string 
-   }
+export interface IRegistration{
+    id?: string;
+    email: string;
+    password: string;
+    fistname: string;
+    lastname: string;
+    address: string;
+    pics?: string;
+    balance?: number | null;
    
 }
