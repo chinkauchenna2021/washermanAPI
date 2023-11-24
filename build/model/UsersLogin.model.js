@@ -35,41 +35,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registration = void 0;
-var zod_1 = require("zod");
-var Registration_model_1 = require("../model/Registration.model");
-var PrismaGlobalClient_1 = __importDefault(require("../lib/PrismaGlobalClient"));
-function registration() {
-    return function (req, res) {
+exports.UsersLoginModel = void 0;
+function UsersLoginModel() {
+    return function (prisma, sanitizedInput) {
         return __awaiter(this, void 0, void 0, function () {
-            var registationControllers, registationStatus, error_1;
+            var LoginDetails, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, (0, Registration_model_1.RegistrationModel)()];
+                        return [4 /*yield*/, prisma.user.findFirst({
+                                where: {
+                                    email: sanitizedInput.email
+                                }
+                            })];
                     case 1:
-                        registationControllers = _a.sent();
-                        registationStatus = registationControllers(PrismaGlobalClient_1.default, req);
-                        res.status(201).json(registationStatus);
-                        return [3 /*break*/, 3];
+                        LoginDetails = _a.sent();
+                        return [2 /*return*/, LoginDetails];
                     case 2:
-                        error_1 = _a.sent();
-                        if (error_1 instanceof zod_1.z.ZodError) {
-                            res.status(400).json({ message: "input validation error ", error: error_1.errors });
-                        }
-                        else {
-                            res.status(500).json({ message: "server error " });
-                        }
-                        return [3 /*break*/, 3];
+                        err_1 = _a.sent();
+                        throw new Error("users Login Failed " + err_1);
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
 }
-exports.registration = registration;
+exports.UsersLoginModel = UsersLoginModel;
