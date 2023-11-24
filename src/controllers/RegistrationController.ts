@@ -1,13 +1,11 @@
 
-class Registation{
-    
-    constructor (){
-
-    }
- 
+export function registration({}){
+   return async function(){
+      
 
 
 
+   }
 
 }
 
