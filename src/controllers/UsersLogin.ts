@@ -17,8 +17,6 @@ export async function UsersLogin(){
             const  login = UsersLoginModel();
             const userLoginResponse = await login(prisma , usersLogin)
               if(userLoginResponse){
-                  req.users = userLoginResponse as IUsersLogin; 
-                   
                     const usersLoginToken =  Jwt.sign(userLoginResponse , String(process.env.JWT_SECRET) , {expiresIn:"1d"})
                     res.status(201).json({user:userLoginResponse , userToken:usersLoginToken})
               }
