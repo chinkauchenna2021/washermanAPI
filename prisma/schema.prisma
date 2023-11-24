@@ -29,10 +29,12 @@ model Bookservice{
    destination String
    numberofitems Int
    phonenumber String
+   price Int
    isUrgent Boolean
    requestCall Boolean
    usersServices User @relation(fields: [bookingid] , references: [id])
    bookingid String
+   isCompleted Boolean
 }
 
 enum Services{

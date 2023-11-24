@@ -1,7 +1,8 @@
+import { PrismaClient } from "@prisma/client";
 
-export function registration({}){
+export function registration(){
    return async function(){
-      
+       
 
 
 
