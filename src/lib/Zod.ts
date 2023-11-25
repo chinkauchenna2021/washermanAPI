@@ -17,3 +17,10 @@ export const ZUsersLogin = z.object({
      password: z.string().min(5 , {message:"Password too short"})
 })
  
+
+export const ZUserBooking = z.object({
+    id:z.string().min(10,{message:'password not correct'})
+})
+
+
+

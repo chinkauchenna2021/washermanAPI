@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ZUsersLogin = exports.ZRegistration = void 0;
+exports.ZUserBooking = exports.ZUsersLogin = exports.ZRegistration = void 0;
 var zod_1 = require("zod");
 exports.ZRegistration = zod_1.z.object({
     email: zod_1.z.string().email({ message: " not a valid email " }),
@@ -14,4 +14,7 @@ exports.ZRegistration = zod_1.z.object({
 exports.ZUsersLogin = zod_1.z.object({
     email: zod_1.z.string().email(),
     password: zod_1.z.string().min(5, { message: "Password too short" })
+});
+exports.ZUserBooking = zod_1.z.object({
+    id: zod_1.z.string().min(10, { message: 'password not correct' })
 });
