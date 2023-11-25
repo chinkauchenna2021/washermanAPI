@@ -1,8 +1,10 @@
+// import express, { Express, Request, Response, NextFunction } from 'express'
 export * from './RegistrationRoute'
-import express , {Express , Request , Response , NextFunction} from 'express'
-import { UserAuth } from '../middleware/UserAuth';
+export * from './GetUserRoute'
 
-const router = express.Router();
+// import { UserAuth } from '../middleware/UserAuth';
 
-router.use(UserAuth);  // controller  middleware 
+// const router = express.Router();
+
+// router.use(UserAuth);  // controller  middleware 
  
