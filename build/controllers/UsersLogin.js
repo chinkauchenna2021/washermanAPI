@@ -39,37 +39,48 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registration = void 0;
+exports.UsersLogin = void 0;
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var zod_1 = require("zod");
-var Registration_model_1 = require("../model/Registration.model");
+var Zod_1 = require("../lib/Zod");
+var UsersLogin_model_1 = require("../model/UsersLogin.model");
 var PrismaGlobalClient_1 = __importDefault(require("../lib/PrismaGlobalClient"));
-function registration() {
-    return function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var registationControllers, registationStatus, error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, (0, Registration_model_1.RegistrationModel)()];
-                    case 1:
-                        registationControllers = _a.sent();
-                        registationStatus = registationControllers(PrismaGlobalClient_1.default, req);
-                        res.status(201).json(registationStatus);
-                        return [3 /*break*/, 3];
-                    case 2:
-                        error_1 = _a.sent();
-                        if (error_1 instanceof zod_1.z.ZodError) {
-                            res.status(400).json({ message: "input validation error ", error: error_1.errors });
-                        }
-                        else {
-                            res.status(500).json({ message: "server error " });
-                        }
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
+function UsersLogin() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, function (req, res) {
+                    return __awaiter(this, void 0, void 0, function () {
+                        var usersLogin, login, userLoginResponse, usersLoginToken, error_1;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    _a.trys.push([0, 2, , 3]);
+                                    usersLogin = Zod_1.ZUsersLogin.parse(req.body);
+                                    login = (0, UsersLogin_model_1.UsersLoginModel)();
+                                    return [4 /*yield*/, login(PrismaGlobalClient_1.default, usersLogin)];
+                                case 1:
+                                    userLoginResponse = _a.sent();
+                                    if (userLoginResponse) {
+                                        usersLoginToken = jsonwebtoken_1.default.sign(userLoginResponse, String(process.env.JWT_SECRET), { expiresIn: "1d" });
+                                        res.status(201).json({ user: userLoginResponse, userToken: usersLoginToken });
+                                    }
+                                    res.json({ message: "User Login Failed" });
+                                    return [3 /*break*/, 3];
+                                case 2:
+                                    error_1 = _a.sent();
+                                    if (error_1 instanceof zod_1.z.ZodError) {
+                                        res.status(400).json({ message: "input validation error ", error: error_1.errors });
+                                    }
+                                    else {
+                                        res.status(500).json({ message: "server error " });
+                                    }
+                                    return [3 /*break*/, 3];
+                                case 3: return [2 /*return*/];
+                            }
+                        });
+                    });
+                }];
         });
-    };
+    });
 }
-exports.registration = registration;
+exports.UsersLogin = UsersLogin;

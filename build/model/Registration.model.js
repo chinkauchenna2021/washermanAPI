@@ -35,41 +35,39 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registration = void 0;
-var zod_1 = require("zod");
-var Registration_model_1 = require("../model/Registration.model");
-var PrismaGlobalClient_1 = __importDefault(require("../lib/PrismaGlobalClient"));
-function registration() {
-    return function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var registationControllers, registationStatus, error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, (0, Registration_model_1.RegistrationModel)()];
-                    case 1:
-                        registationControllers = _a.sent();
-                        registationStatus = registationControllers(PrismaGlobalClient_1.default, req);
-                        res.status(201).json(registationStatus);
-                        return [3 /*break*/, 3];
-                    case 2:
-                        error_1 = _a.sent();
-                        if (error_1 instanceof zod_1.z.ZodError) {
-                            res.status(400).json({ message: "input validation error ", error: error_1.errors });
-                        }
-                        else {
-                            res.status(500).json({ message: "server error " });
-                        }
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
+exports.RegistrationModel = void 0;
+var Zod_1 = require("../lib/Zod");
+function RegistrationModel() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, function (prisma, req) {
+                    var _a;
+                    return __awaiter(this, void 0, void 0, function () {
+                        var _b, email, password, firstname, lastname, address, pics, data, registationStatus;
+                        return __generator(this, function (_c) {
+                            switch (_c.label) {
+                                case 0:
+                                    _b = req.body, email = _b.email, password = _b.password, firstname = _b.firstname, lastname = _b.lastname, address = _b.address, pics = _b.pics;
+                                    data = Zod_1.ZRegistration.parse({ email: email, password: password, firstname: firstname, lastname: lastname, address: address, pics: pics });
+                                    return [4 /*yield*/, ((_a = prisma === null || prisma === void 0 ? void 0 : prisma.user) === null || _a === void 0 ? void 0 : _a.create({
+                                            data: {
+                                                email: data.email,
+                                                password: data.password,
+                                                fistname: data.fistname,
+                                                lastname: data.lastname,
+                                                address: data.address,
+                                                pics: data.pics
+                                            }
+                                        }))];
+                                case 1:
+                                    registationStatus = _c.sent();
+                                    return [2 /*return*/, registationStatus];
+                            }
+                        });
+                    });
+                }];
         });
-    };
+    });
 }
-exports.registration = registration;
+exports.RegistrationModel = RegistrationModel;

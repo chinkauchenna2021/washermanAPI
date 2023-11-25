@@ -10,7 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User{
    id  String @id @default(uuid())
    email String @unique
@@ -19,6 +18,7 @@ model User{
    lastname String
    address String 
    pics String 
+   balance Int?
    bookingservices Bookservice[]
 }
 
@@ -29,10 +29,12 @@ model Bookservice{
    destination String
    numberofitems Int
    phonenumber String
+   price Int
    isUrgent Boolean
    requestCall Boolean
    usersServices User @relation(fields: [bookingid] , references: [id])
    bookingid String
+   isCompleted Boolean
 }
 
 enum Services{

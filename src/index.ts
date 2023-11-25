@@ -1,4 +1,5 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
+import { UserAuth } from './middleware/UserAuth';
 const app = express()
 
 app.use(express.json())
