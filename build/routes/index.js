@@ -16,7 +16,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // import express, { Express, Request, Response, NextFunction } from 'express'
 __exportStar(require("./RegistrationRoute"), exports);
-__exportStar(require("./GetUserRoute"), exports);
+__exportStar(require("./GetAllUsersRoute"), exports);
 // import { UserAuth } from '../middleware/UserAuth';
 // const router = express.Router();
 // router.use(UserAuth);  // controller  middleware 

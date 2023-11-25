@@ -1,6 +1,6 @@
 // import express, { Express, Request, Response, NextFunction } from 'express'
 export * from './RegistrationRoute'
-export * from './GetUserRoute'
+export * from './GetAllUsersRoute'
 
 // import { UserAuth } from '../middleware/UserAuth';
 

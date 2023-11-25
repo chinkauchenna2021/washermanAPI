@@ -39,12 +39,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetUserRoute = void 0;
-var express_1 = __importDefault(require("express"));
+exports.GetAllUsers = void 0;
 var PrismaGlobalClient_1 = __importDefault(require("../lib/PrismaGlobalClient"));
-var router = express_1.default.Router();
-exports.GetUserRoute = router;
-router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var GetAllUsers = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var users, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -63,4 +60,5 @@ router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, f
             case 3: return [2 /*return*/];
         }
     });
-}); });
+}); };
+exports.GetAllUsers = GetAllUsers;
