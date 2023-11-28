@@ -6,8 +6,8 @@ import { ZRegistration } from "../lib/Zod";
 import { RegistrationModel } from '../model/Registration.model';
 import prisma from '../lib/PrismaGlobalClient';
 
-export function registration(){
-    return async function(req:Request , res:Response ){
+export function registration(req:Request , res:Response , next:NextFunction ){
+    return async function(){
         try{
       const  registationControllers = await RegistrationModel();
       const registationStatus =  registationControllers(prisma , req)

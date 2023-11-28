@@ -50,7 +50,7 @@ function UserBookingModel(req) {
                         id = Zod_1.ZUserBooking.parse(req.body);
                         return [4 /*yield*/, ((_a = prisma === null || prisma === void 0 ? void 0 : prisma.bookservice) === null || _a === void 0 ? void 0 : _a.findMany({
                                 where: {
-                                    id: String(id),
+                                    bookingid: String(id),
                                 },
                             }))];
                     case 1:

@@ -20,6 +20,8 @@ model User{
    pics String 
    balance Int?
    bookingservices Bookservice[]
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
 }
 
 
@@ -35,6 +37,8 @@ model Bookservice{
    usersServices User @relation(fields: [bookingid] , references: [id])
    bookingid String
    isCompleted Boolean
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
 }
 
 enum Services{
