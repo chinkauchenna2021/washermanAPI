@@ -43,8 +43,8 @@ exports.registration = void 0;
 var zod_1 = require("zod");
 var Registration_model_1 = require("../model/Registration.model");
 var PrismaGlobalClient_1 = __importDefault(require("../lib/PrismaGlobalClient"));
-function registration() {
-    return function (req, res) {
+function registration(req, res, next) {
+    return function () {
         return __awaiter(this, void 0, void 0, function () {
             var registationControllers, registationStatus, error_1;
             return __generator(this, function (_a) {
