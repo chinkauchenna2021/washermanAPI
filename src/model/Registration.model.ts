@@ -5,7 +5,7 @@ import { IRegistration } from '../dto/IRegistration';
 
 
 export async  function RegistrationModel(){
-   return async function(prisma:PrismaClient , req:Request):Promise<IRegistration>{
+   return async function(prisma:PrismaClient , req:Request){
     const {email ,password, firstname , lastname , address , pics } = req.body ; 
     const data = ZRegistration.parse({email , password , firstname , lastname , address , pics})
     const registationStatus =   await prisma?.user?.create({
