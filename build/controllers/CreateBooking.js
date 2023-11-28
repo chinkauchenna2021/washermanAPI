@@ -35,37 +35,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserBookingModel = void 0;
-var Zod_1 = require("../lib/Zod");
-function UserBookingModel(req) {
-    return function (prisma) {
-        var _a;
+exports.CreateBooking = void 0;
+var CreateBooking_model_1 = require("../model/CreateBooking.model");
+var PrismaGlobalClient_1 = __importDefault(require("../lib/PrismaGlobalClient"));
+function CreateBooking(req, res, next) {
+    return function () {
         return __awaiter(this, void 0, void 0, function () {
-            var id, usersManyBooking, error_1;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        id = Zod_1.ZUserBooking.parse(req.body);
-                        return [4 /*yield*/, ((_a = prisma === null || prisma === void 0 ? void 0 : prisma.bookservice) === null || _a === void 0 ? void 0 : _a.findMany({
-                                where: {
-                                    bookingid: String(id),
-                                },
-                            }))];
-                    case 1:
-                        usersManyBooking = _b.sent();
-                        if (usersManyBooking) {
-                            return [2 /*return*/, usersManyBooking];
-                        }
-                        return [3 /*break*/, 3];
-                    case 2:
-                        error_1 = _b.sent();
-                        throw new Error("Error fetching users Booking");
-                    case 3: return [2 /*return*/];
+            var booking, bookingResponse;
+            return __generator(this, function (_a) {
+                try {
+                    booking = (0, CreateBooking_model_1.CreateBookingModel)();
+                    bookingResponse = booking(PrismaGlobalClient_1.default, req);
+                    if (bookingResponse) {
+                        res.status(201).json({ response: bookingResponse });
+                    }
                 }
+                catch (error) {
+                    res.status(400).json({ message: "Server Encountered Error " });
+                }
+                return [2 /*return*/];
             });
         });
     };
 }
-exports.UserBookingModel = UserBookingModel;
+exports.CreateBooking = CreateBooking;

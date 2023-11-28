@@ -9,7 +9,7 @@ export function UserBookingModel(req: Request) {
 
       const usersManyBooking = await prisma?.bookservice?.findMany({
         where: {
-          id: String(id),
+          bookingid: String(id),
         },
       });
       if (usersManyBooking) {

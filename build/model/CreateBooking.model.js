@@ -36,36 +36,53 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserBookingModel = void 0;
-var Zod_1 = require("../lib/Zod");
-function UserBookingModel(req) {
-    return function (prisma) {
-        var _a;
+exports.CreateBookingModel = void 0;
+var client_1 = require("@prisma/client");
+// id String @id @default(uuid())
+// services Services 
+// destination String
+// numberofitems Int
+// phonenumber String
+// price Int
+// isUrgent Boolean
+// requestCall Boolean
+// usersServices User @relation(fields: [bookingid] , references: [id])
+// bookingid String
+// isCompleted Boolean
+// createdAt DateTime @default(now())
+// updatedAt DateTime @updatedAt
+function CreateBookingModel() {
+    return function (prisma, req) {
         return __awaiter(this, void 0, void 0, function () {
-            var id, usersManyBooking, error_1;
+            var _a, destination, numberofitems, phonenumber, price, isUrgent, requestCall, isCompleted, id, bookingModel;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        id = Zod_1.ZUserBooking.parse(req.body);
-                        return [4 /*yield*/, ((_a = prisma === null || prisma === void 0 ? void 0 : prisma.bookservice) === null || _a === void 0 ? void 0 : _a.findMany({
-                                where: {
-                                    bookingid: String(id),
+                        _a = req.body, destination = _a.destination, numberofitems = _a.numberofitems, phonenumber = _a.phonenumber, price = _a.price, isUrgent = _a.isUrgent, requestCall = _a.requestCall, isCompleted = _a.isCompleted;
+                        id = req.users.id;
+                        return [4 /*yield*/, prisma.bookservice.create({
+                                data: {
+                                    services: client_1.Services.CARPET,
+                                    destination: destination,
+                                    numberofitems: numberofitems,
+                                    phonenumber: phonenumber,
+                                    price: price,
+                                    usersServices: {
+                                        connect: {
+                                            id: id,
+                                        },
+                                    },
+                                    isCompleted: isCompleted,
+                                    isUrgent: isUrgent,
+                                    requestCall: requestCall,
                                 },
-                            }))];
+                            })];
                     case 1:
-                        usersManyBooking = _b.sent();
-                        if (usersManyBooking) {
-                            return [2 /*return*/, usersManyBooking];
-                        }
-                        return [3 /*break*/, 3];
-                    case 2:
-                        error_1 = _b.sent();
-                        throw new Error("Error fetching users Booking");
-                    case 3: return [2 /*return*/];
+                        bookingModel = _b.sent();
+                        return [2 /*return*/, bookingModel];
                 }
             });
         });
     };
 }
-exports.UserBookingModel = UserBookingModel;
+exports.CreateBookingModel = CreateBookingModel;

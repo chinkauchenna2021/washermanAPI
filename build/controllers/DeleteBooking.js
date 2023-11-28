@@ -35,37 +35,37 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserBookingModel = void 0;
-var Zod_1 = require("../lib/Zod");
-function UserBookingModel(req) {
-    return function (prisma) {
-        var _a;
+exports.DeleteBooking = void 0;
+var DeleteBooking_model_1 = require("../model/DeleteBooking.model");
+var PrismaGlobalClient_1 = __importDefault(require("../lib/PrismaGlobalClient"));
+function DeleteBooking(req, res, next) {
+    return function () {
         return __awaiter(this, void 0, void 0, function () {
-            var id, usersManyBooking, error_1;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var deleteModel, deleteResponse, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        id = Zod_1.ZUserBooking.parse(req.body);
-                        return [4 /*yield*/, ((_a = prisma === null || prisma === void 0 ? void 0 : prisma.bookservice) === null || _a === void 0 ? void 0 : _a.findMany({
-                                where: {
-                                    bookingid: String(id),
-                                },
-                            }))];
+                        _a.trys.push([0, 2, , 3]);
+                        deleteModel = (0, DeleteBooking_model_1.DeleteSingleBookingModel)();
+                        return [4 /*yield*/, deleteModel(PrismaGlobalClient_1.default, req)];
                     case 1:
-                        usersManyBooking = _b.sent();
-                        if (usersManyBooking) {
-                            return [2 /*return*/, usersManyBooking];
+                        deleteResponse = _a.sent();
+                        if (deleteResponse) {
+                            res.status(201).json(deleteResponse);
                         }
                         return [3 /*break*/, 3];
                     case 2:
-                        error_1 = _b.sent();
-                        throw new Error("Error fetching users Booking");
+                        error_1 = _a.sent();
+                        res.json({ message: "server Error occured " });
+                        return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
 }
-exports.UserBookingModel = UserBookingModel;
+exports.DeleteBooking = DeleteBooking;
